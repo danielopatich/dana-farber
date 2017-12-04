@@ -57,7 +57,7 @@ class App extends Component {
   }
 
   inputSearch(searchValue, inputIndex) {
-    const { inputs, dataSets } = this.state;
+    const { inputs } = this.state;
     const fireSearchValue = searchValue.length === 4 ? true : false;
     const url = `http://www.cbioportal.org/api/molecular-profiles/gbm_tcga_gistic/molecular-data?sampleListId=gbm_tcga_cna&entrezGeneId=${searchValue}&projection=SUMMARY`;
 
@@ -116,18 +116,23 @@ class App extends Component {
       const showAdd = index === inputs.length - 1 ? true : false;
       const shouldClear = index === 0 && inputs.length === 1 ? true : false;
       return (
-        <Input
-          {...i}
-          addInput={this.addInput}
-          index={index}
-          clearState={this.clearState}
-          onChange={(value, inputIndex) => {
-            this.inputSearch(value, inputIndex);
-          }}
-          removeInput={this.removeInput}
-          shouldClear={shouldClear}
-          showAdd={showAdd}
-        />
+        <div className="container">
+          <span>
+            <i className="fa fa-search" />
+          </span>
+          <Input
+            {...i}
+            addInput={this.addInput}
+            index={index}
+            clearState={this.clearState}
+            onChange={(value, inputIndex) => {
+              this.inputSearch(value, inputIndex);
+            }}
+            removeInput={this.removeInput}
+            shouldClear={shouldClear}
+            showAdd={showAdd}
+          />
+        </div>
       );
     });
   }
@@ -138,7 +143,7 @@ class App extends Component {
     const graphHeight = 1000;
 
     if (loading) {
-      return <span>Please Enter a Gene ID</span>;
+      return <span />;
     }
     if (dataSets.length) {
       return (
@@ -146,7 +151,7 @@ class App extends Component {
           style={{
             width: `${graphWidth}px`,
             height: `${graphHeight}px`,
-            background: '#BBB',
+            background: '#444c5d',
           }}
         >
           {dataSets
@@ -165,11 +170,12 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Glioblastoma</h1>
         </header>
-        {this.renderInputs()}
-        <div className="data">{this.displayResults()}</div>
+        <div className="container">
+          {this.renderInputs()}
+          <div className="data">{this.displayResults()}</div>
+        </div>
       </div>
     );
   }

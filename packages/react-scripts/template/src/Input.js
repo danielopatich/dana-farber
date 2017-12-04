@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 export const Input = props => {
   let removeButton;
@@ -24,11 +24,12 @@ export const Input = props => {
   }
 
   return (
-    <div>
+    <div className="search-container">
       <input
+        className="search"
         value={props.value ? props.value : ''}
         type="text"
-        placeholder="Search"
+        placeholder="Search Using a Gene ID..."
         onChange={onChange}
       />
       {props.showAdd ? addButton : null}
