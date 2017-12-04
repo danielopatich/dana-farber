@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import $ from 'jquery';
 import { Input } from './Input';
 import { DataBar } from './DataBar';
-
-// TODO:
-// 3) Style length of results in graph
 
 class App extends Component {
   constructor(props) {
@@ -116,7 +112,7 @@ class App extends Component {
       const showAdd = index === inputs.length - 1 ? true : false;
       const shouldClear = index === 0 && inputs.length === 1 ? true : false;
       return (
-        <div className="container">
+        <div>
           <span>
             <i className="fa fa-search" />
           </span>
@@ -143,7 +139,7 @@ class App extends Component {
     const graphHeight = 1000;
 
     if (loading) {
-      return <span />;
+      return <div />;
     }
     if (dataSets.length) {
       return (
@@ -170,11 +166,17 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Glioblastoma</h1>
+          <h1 className="App-title">Glioblastoma Multiforme.</h1>
         </header>
         <div className="container">
-          {this.renderInputs()}
-          <div className="data">{this.displayResults()}</div>
+          <ul className="flex-container">
+            <li className="flex-item search-container">
+              {this.renderInputs()}
+            </li>
+            <li className="flex-item data-container">
+              {this.displayResults()}
+            </li>
+          </ul>
         </div>
       </div>
     );
